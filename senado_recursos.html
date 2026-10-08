@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+ <head>
+  <meta charset="UTF-8" />
+  <title>Todos os Recursos Utilizados - Senador</title>
+  <style>/*<![CDATA[*/
+/* 
+ * Estilos CSS centralizados para relatórios do Senado Federal
+ * Arquivo: relatorios-common.css
+ * Versão: 1.0.0
+ */
+
+/* Reset e configurações básicas */
+* {
+    box-sizing: border-box;
+}
+
+/* Configurações de página para PDF */
+@page {
+    size: A4 portrait;
+    margin: 160px 18px 60px 18px;
+    @top-center {
+        content: element(page-header);
+    }
+    @bottom-center {
+        content: element(page-footer);
+    }
+}
+
+/* Configurações do corpo do documento */
+body {
+    font-family: 'DejaVu Sans', Arial, sans-serif;
+    font-size: 10px;
+    color: #000;
+}
+
+/* Cabeçalho e rodapé fixos */
+.page-header {
+    position: running(page-header);
+}
+
+.page-footer {
+    position: running(page-footer);
+}
+
+.pageNumber:before {
+    content: counter(page);
+}
+
+.totalPages:before {
+    content: counter(pages);
+}
+
+/* Tabela do cabeçalho */
+table.hdr {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    border: 1px solid #999;
+    border-radius: 6px;
+    margin-bottom: 6px;
+}
+
+table.hdr td {
+    vertical-align: top;
+}
+
+td.hdr-logo {
+    width: 90px;
+    padding: 8px;
+    text-align: center;
+}
+
+td.hdr-mid {
+    padding: 8px;
+}
+
+td.hdr-meta {
+    width: 230px;
+    padding: 8px;
+    border-left: 1px solid #999;
+}
+
+/* Informações do cabeçalho */
+.info .label {
+    font-size: 11px;
+}
+
+.info h1 {
+    font-size: 20px;
+    margin: 0;
+}
+
+.info .divider {
+    border-top: 1px solid #999;
+    margin: 6px 0;
+}
+
+.info .title {
+    font-weight: 700;
+    margin-top: 4px;
+}
+
+.meta-top {
+    text-align: right;
+}
+
+.meta-ref {
+    margin-top: 8px;
+}
+
+/* Tabela do cabeçalho da grade */
+table.grid-head {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+    margin: 0;
+}
+
+table.grid-head th {
+    border: 1px solid #999;
+    background: #e3e3e3;
+    padding: 6px 8px;
+    text-transform: uppercase;
+    font-weight: 700;
+    line-height: 1.15;
+}
+
+/* Tabela de dados */
+table.grid {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+}
+
+table.grid td {
+    border: 1px solid #999;
+    padding: 6px;
+    vertical-align: top;
+}
+
+/* Prevenção de quebra de página */
+.linha-servidor,
+.linha-exonerado,
+.linha-aposentado,
+.linha-estagiario,
+.linha-senador,
+.linha-pensionista,
+.linha-escritorio {
+    page-break-inside: avoid;
+}
+
+/* Grupos e subtotais */
+.grupo-ano,
+.grupo-orgao,
+.grupo-categoria,
+.grupo-aposentadoria,
+.grupo-pensao,
+.area-grupo,
+.pais-grupo,
+.uf-grupo {
+    background: #e3e3e3;
+    font-weight: 700;
+    padding: 4px 8px;
+    border: 1px solid #999;
+    border-radius: 3px;
+    margin-top: 8px;
+    page-break-after: avoid;
+}
+
+.subtotal-ano td,
+.subtotal-orgao td,
+.subtotal-categoria td,
+.subtotal-grupo td,
+.subtotal-area td,
+.subtotal-pais td,
+.subtotal-uf td {
+    border: 1px solid #999;
+    background: #f0f0f0;
+    font-weight: 700;
+    padding: 6px;
+}
+
+/* Barra de totais */
+.sumbar td {
+    border: 1px solid #999;
+    background: #eee;
+    font-weight: 700;
+    text-align: right;
+    padding: 6px;
+}
+
+/* Rodapé */
+.ftr {
+    width: 100%;
+}
+
+.ftr td {
+    font-size: 9px;
+    padding: 4px 6px;
+}
+
+.ftr-center {
+    text-align: center;
+}
+
+.ftr-right {
+    text-align: right;
+}
+
+/* Classes utilitárias de texto */
+.muted {
+    color: #444;
+}
+
+.texto-centro {
+    text-align: center;
+}
+
+.texto-esquerda {
+    text-align: left;
+}
+
+.texto-direita {
+    text-align: right;
+}
+
+/* Informações principais */
+.servidor-info,
+.exonerado-info,
+.aposentado-info,
+.estagiario-info,
+.senador-info,
+.pensionista-info {
+    font-weight: 700;
+}
+
+/* Informações secundárias */
+.cargo-info,
+.lotacao-info,
+.partido-uf,
+.curso-info,
+.instituidor-info {
+    font-size: 9px;
+    color: #555;
+    margin-top: 2px;
+}
+
+.endereco-info {
+    font-size: 9px;
+    color: #666;
+    margin-top: 2px;
+    line-height: 1.2;
+}
+
+/* Informações de data */
+.data-info {
+    font-size: 9px;
+    color: #666;
+}
+
+/* Valores monetários */
+.valor-monetario {
+    font-size: 10px;
+    color: #000;
+    font-weight: 600;
+    text-align: right;
+}
+
+/* Percentuais especiais */
+.ipc-atual,
+.pssc-atual {
+    font-size: 10px;
+    color: #0066cc;
+    font-weight: 700;
+    text-align: right;
+}
+
+.percentual-info {
+    font-size: 9px;
+    color: #333;
+    text-align: center;
+}
+
+/* Status coloridos */
+.status-ativo {
+    color: #006600;
+    font-weight: 700;
+}
+
+.status-inativo,
+.status-suspenso {
+    color: #cc6600;
+    font-weight: 700;
+}
+
+.status-cancelado,
+.status-concluido {
+    color: #cc0000;
+    font-weight: 700;
+}
+
+/* Destaques visuais */
+.senador-destaque,
+.pensionista-destaque {
+    background-color: #f8f9fa;
+}
+
+/* Informações específicas por contexto */
+.nivel-info,
+.tipo-escritorio,
+.pais-info {
+    font-size: 9px;
+    color: #0066cc;
+    font-weight: 600;
+}
+
+.tipo-beneficio,
+.tipo-pensao {
+    font-size: 9px;
+    color: #666;
+    font-style: italic;
+}
+
+.grau-parentesco {
+    font-size: 8px;
+    color: #666;
+    font-style: italic;
+    margin-top: 1px;
+}
+
+/* Informações de contato */
+.telefone-info,
+.cep-info {
+    font-size: 8px;
+    color: #666;
+    font-family: monospace;
+}
+
+.email-info {
+    font-size: 8px;
+    color: #0066cc;
+    text-decoration: underline;
+}
+
+/* Informações de responsabilidade */
+.responsavel-info {
+    font-size: 9px;
+    color: #333;
+    font-weight: 600;
+}
+
+.cargo-responsavel {
+    font-size: 8px;
+    color: #666;
+    font-style: italic;
+}
+
+/* Informações financeiras específicas */
+.desconto-info {
+    font-size: 9px;
+    color: #cc6600;
+    font-weight: 600;
+}
+
+.contribuicao-info {
+    font-size: 9px;
+    color: #333;
+    text-align: right;
+}
+
+/* Informações de localização */
+.cidade-info {
+    font-weight: 600;
+    color: #333;
+}
+
+.bairro-info {
+    font-size: 9px;
+    color: #666;
+}
+
+/* Informações de contexto adicional */
+.instituicao-info,
+.atividade-info,
+.lotacao-info,
+.cargo-instituidor {
+    font-size: 8px;
+    color: #777;
+    margin-top: 1px;
+}
+
+.periodo-info,
+.duracao-info {
+    font-size: 9px;
+    color: #666;
+}
+
+.duracao-info {
+    color: #333;
+    font-weight: 600;
+}
+
+/* Data de geração centralizada */
+.data-geracao {
+    margin-top: 10px;
+    text-align: center;
+}
+
+/* Classes de coluna padrão - podem ser sobrescritas em cada template */
+col.c1 { width: 20%; }
+col.c2 { width: 15%; }
+col.c3 { width: 15%; }
+col.c4 { width: 15%; }
+col.c5 { width: 15%; }
+col.c6 { width: 10%; }
+col.c7 { width: 5%; }
+col.c8 { width: 5%; }
+/*]]>*/</style>
+  <style>/*<![CDATA[*/
+
+        @page {
+            size: A4 portrait;
+            margin: 160px 18px 60px 18px;
+
+            @top-center {
+                content: element(page-header);
+            }
+
+            @bottom-center {
+                content: element(page-footer);
+            }
+        }
+
+        .page-header {
+            position: running(page-header);
+        }
+
+        .page-footer {
+            position: running(page-footer);
+        }
+
+        .pageNumber:before {
+            content: counter(page);
+        }
+
+        .totalPages:before {
+            content: counter(pages);
+        }
+
+        .secao-titulo {
+            background-color: #f5f5f5;
+            font-weight: bold;
+            padding: 8px;
+            border-bottom: 2px solid #333;
+            margin-top: 16px;
+        }
+
+        .secao-subtitulo {
+            background-color: #e8e8e8;
+            font-weight: bold;
+            padding: 6px 8px;
+            border-bottom: 1px solid #666;
+        }
+
+        .info-senador {
+            margin: 16px 0;
+            padding: 12px;
+            background-color: #f9f9f9;
+            border-left: 4px solid #004080;
+        }
+
+        .info-senador table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .info-senador td {
+            padding: 4px 8px;
+        }
+
+        .info-senador .label {
+            font-weight: bold;
+            width: 120px;
+        }
+
+        col.c1 {
+            width: 60%;
+        }
+
+        col.c2 {
+            width: 40%;
+        }
+
+        .ftr {
+            width: 100%;
+        }
+
+        .ftr td {
+            font-size: 9px;
+            padding: 4px 6px;
+        }
+
+        .ftr-center {
+            text-align: center;
+        }
+
+        .ftr-right {
+            text-align: right;
+        }
+
+        .local-row td {
+            font-weight: bold;
+            font-style: italic;
+        }
+
+        .vinculo-row td:first-child {
+            padding-left: 20px;
+        }
+
+        .total-row td {
+            font-weight: bold;
+            background-color: #f5f5f5;
+        }
+    
+/*]]>*/</style>
+ </head>
+ <body>
+  <!-- HEADER FIXO -->
+  <div class="page-header">
+   <table class="hdr" role="presentation">
+    <tbody>
+     <tr>
+      <td class="hdr-logo"><img src="data:image/png;base64,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" width="64" alt="Brasão" /></td>
+      <td class="hdr-mid">
+       <div class="info">
+        <div class="label">
+         Instituição
+        </div>
+        <h1>SENADO FEDERAL</h1>
+        <div class="divider"></div>
+        <div class="label">
+         Relatório
+        </div>
+        <div class="title">
+         TODOS OS RECURSOS UTILIZADOS - SENADOR
+        </div>
+       </div></td>
+      <td class="hdr-meta">
+       <div class="meta-top">
+        Página <span class="pageNumber"></span> / <span class="totalPages"></span>
+       </div>
+       <div class="data-geracao">
+        Data de Geração
+        <br /><span>08/10/2026 11:57:16</span>
+       </div></td>
+     </tr>
+    </tbody>
+   </table>
+  </div><!-- CONTEÚDO -->
+  <div>
+   <!-- INFO DO SENADOR -->
+   <div class="info-senador">
+    <table role="presentation">
+     <tbody>
+      <tr>
+       <td class="label">Senador:</td>
+       <td>Astronauta Marcos Pontes</td>
+      </tr>
+      <tr>
+       <td class="label">Partido:</td>
+       <td>PL</td>
+      </tr>
+      <tr>
+       <td class="label">UF:</td>
+       <td>SP</td>
+      </tr>
+      <tr>
+       <td class="label">Ano:</td>
+       <td>2026</td>
+      </tr>
+     </tbody>
+    </table>
+   </div><!-- SEÇÃO 1: COTAS PARLAMENTARES -->
+   <div class="secao-titulo">
+    1. COTAS PARLAMENTARES (CEAP)
+   </div>
+   <div>
+    <div>
+     <table class="grid linha-item" role="presentation">
+      <colgroup>
+       <col class="c1" />
+       <col class="c2" />
+      </colgroup>
+      <tbody>
+       <tr>
+        <td>Aluguel de imóveis para escritório político</td>
+        <td style="text-align: right;">R$ 48.567,01</td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <div>
+     <table class="grid linha-item" role="presentation">
+      <colgroup>
+       <col class="c1" />
+       <col class="c2" />
+      </colgroup>
+      <tbody>
+       <tr>
+        <td>Aquisição de material de consumo</td>
+        <td style="text-align: right;">R$ 3.463,50</td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <div>
+     <table class="grid linha-item" role="presentation">
+      <colgroup>
+       <col class="c1" />
+       <col class="c2" />
+      </colgroup>
+      <tbody>
+       <tr>
+        <td>Locomoção, hospedagem, alimentação e combustíveis</td>
+        <td style="text-align: right;">R$ 15.958,39</td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <div>
+     <table class="grid linha-item" role="presentation">
+      <colgroup>
+       <col class="c1" />
+       <col class="c2" />
+      </colgroup>
+      <tbody>
+       <tr>
+        <td>Contratação de serviços de apoio ao parlamentar</td>
+        <td style="text-align: right;">R$ 32.562,73</td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <div>
+     <table class="grid linha-item" role="presentation">
+      <colgroup>
+       <col class="c1" />
+       <col class="c2" />
+      </colgroup>
+      <tbody>
+       <tr>
+        <td>Divulgação da atividade parlamentar</td>
+        <td style="text-align: right;">R$ 62.719,20</td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <div>
+     <table class="grid linha-item" role="presentation">
+      <colgroup>
+       <col class="c1" />
+       <col class="c2" />
+      </colgroup>
+      <tbody>
+       <tr>
+        <td>Passagens aéreas, aquáticas e terrestres nacionais</td>
+        <td style="text-align: right;">R$ 69.186,68</td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <div>
+     <table class="grid linha-item" role="presentation">
+      <colgroup>
+       <col class="c1" />
+       <col class="c2" />
+      </colgroup>
+      <tbody>
+       <tr>
+        <td>Serviços de Segurança Privada</td>
+        <td style="text-align: right;">R$ 0,00</td>
+       </tr>
+      </tbody>
+     </table>
+    </div><!-- TOTAL COTAS -->
+    <table class="grid linha-item total-row" role="presentation" style="margin-top:-1px">
+     <colgroup>
+      <col class="c1" />
+      <col class="c2" />
+     </colgroup>
+     <tbody>
+      <tr>
+       <td style="font-weight: bold;">TOTAL COTAS</td>
+       <td style="text-align: right; font-weight: bold;">R$ 232.457,51</td>
+      </tr>
+     </tbody>
+    </table>
+   </div><!-- SEÇÃO 2: GASTOS NÃO INCLUSOS NAS COTAS -->
+   <div class="secao-titulo">
+    2. GASTOS NÃO INCLUSOS NAS COTAS
+   </div>
+   <div>
+    <div>
+     <table class="grid linha-item" role="presentation">
+      <colgroup>
+       <col class="c1" />
+       <col class="c2" />
+      </colgroup>
+      <tbody>
+       <tr>
+        <td>Viagens Oficiais - Diárias</td>
+        <td style="text-align: right;">R$ 243.636,98</td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <div>
+     <table class="grid linha-item" role="presentation">
+      <colgroup>
+       <col class="c1" />
+       <col class="c2" />
+      </colgroup>
+      <tbody>
+       <tr>
+        <td>Viagens Oficiais - Ressarcimento de Passagens</td>
+        <td style="text-align: right;">R$ 0,00</td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <div>
+     <table class="grid linha-item" role="presentation">
+      <colgroup>
+       <col class="c1" />
+       <col class="c2" />
+      </colgroup>
+      <tbody>
+       <tr>
+        <td>Consumo de Material - Outros materiais</td>
+        <td style="text-align: right;">R$ 4.272,05</td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <div>
+     <table class="grid linha-item" role="presentation">
+      <colgroup>
+       <col class="c1" />
+       <col class="c2" />
+      </colgroup>
+      <tbody>
+       <tr>
+        <td>Correios</td>
+        <td style="text-align: right;">R$ 129.086,46</td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <div>
+     <table class="grid linha-item" role="presentation">
+      <colgroup>
+       <col class="c1" />
+       <col class="c2" />
+      </colgroup>
+      <tbody>
+       <tr>
+        <td>Cotas para Impulsionamento em Mídias Sociais</td>
+        <td style="text-align: right;">R$ 19.125,12</td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <div>
+     <table class="grid linha-item" role="presentation">
+      <colgroup>
+       <col class="c1" />
+       <col class="c2" />
+      </colgroup>
+      <tbody>
+       <tr>
+        <td>Aquisição de passagens aéreas (ATC 2/2023)</td>
+        <td style="text-align: right;">R$ 49.658,22</td>
+       </tr>
+      </tbody>
+     </table>
+    </div><!-- TOTAL GASTOS NÃO INCLUSOS -->
+    <table class="grid linha-item total-row" role="presentation" style="margin-top:-1px">
+     <colgroup>
+      <col class="c1" />
+      <col class="c2" />
+     </colgroup>
+     <tbody>
+      <tr>
+       <td style="font-weight: bold;">TOTAL GASTOS</td>
+       <td style="text-align: right; font-weight: bold;">R$ 445.778,83</td>
+      </tr>
+     </tbody>
+    </table>
+   </div><!-- SEÇÃO 3: BENEFÍCIOS -->
+   <div class="secao-titulo">
+    3. BENEFÍCIOS
+   </div>
+   <div>
+    <div>
+     <table class="grid linha-item" role="presentation">
+      <colgroup>
+       <col class="c1" />
+       <col class="c2" />
+      </colgroup>
+      <tbody>
+       <tr>
+        <td>Auxílio-Moradia</td>
+        <td>Utilizou</td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <div>
+     <table class="grid linha-item" role="presentation">
+      <colgroup>
+       <col class="c1" />
+       <col class="c2" />
+      </colgroup>
+      <tbody>
+       <tr>
+        <td>Imóvel Funcional</td>
+        <td>Não utilizou</td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+   </div><!-- SEÇÃO 4: PESSOAL DO GABINETE -->
+   <div class="secao-titulo">
+    4. PESSOAL DO GABINETE
+   </div>
+   <div>
+    <div>
+     <table class="grid linha-item local-row" role="presentation">
+      <colgroup>
+       <col class="c1" />
+       <col class="c2" />
+      </colgroup>
+      <tbody>
+       <tr>
+        <td>Gabinete</td>
+        <td>20 pessoa(s)</td>
+       </tr>
+      </tbody>
+     </table>
+     <div>
+      <table class="grid linha-item vinculo-row" role="presentation">
+       <colgroup>
+        <col class="c1" />
+        <col class="c2" />
+       </colgroup>
+       <tbody>
+        <tr>
+         <td>› Comissionado</td>
+         <td>19 pessoa(s)</td>
+        </tr>
+       </tbody>
+      </table>
+     </div>
+     <div>
+      <table class="grid linha-item vinculo-row" role="presentation">
+       <colgroup>
+        <col class="c1" />
+        <col class="c2" />
+       </colgroup>
+       <tbody>
+        <tr>
+         <td>› Efetivo</td>
+         <td>1 pessoa(s)</td>
+        </tr>
+       </tbody>
+      </table>
+     </div>
+    </div>
+    <div>
+     <table class="grid linha-item local-row" role="presentation">
+      <colgroup>
+       <col class="c1" />
+       <col class="c2" />
+      </colgroup>
+      <tbody>
+       <tr>
+        <td>Escritório(s) de Apoio</td>
+        <td>4 pessoa(s)</td>
+       </tr>
+      </tbody>
+     </table>
+     <div>
+      <table class="grid linha-item vinculo-row" role="presentation">
+       <colgroup>
+        <col class="c1" />
+        <col class="c2" />
+       </colgroup>
+       <tbody>
+        <tr>
+         <td>› Comissionado</td>
+         <td>4 pessoa(s)</td>
+        </tr>
+       </tbody>
+      </table>
+     </div>
+    </div>
+   </div>
+  </div><!-- FOOTER FIXO -->
+  <div class="page-footer">
+   <table class="ftr" role="presentation">
+    <tbody>
+     <tr>
+      <td><b>Dados Abertos do Senado Federal</b></td>
+      <td class="ftr-center">Gestão de Pessoas</td>
+      <td class="ftr-right">Versão <b>2.3.5</b></td>
+     </tr>
+    </tbody>
+   </table>
+  </div>
+ </body>
+</html>

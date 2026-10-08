@@ -1,0 +1,78 @@
+{
+  "dados": [
+    {
+      "idProposicao": 2647362,
+      "uriProposicao": "https://dadosabertos.camara.leg.br/api/v2/proposicoes/2647362",
+      "idDeputadoAutor": 178946,
+      "uriAutor": "https://dadosabertos.camara.leg.br/api/v2/deputados/178946",
+      "codTipoAutor": 10000,
+      "tipoAutor": "Deputado(a)",
+      "nomeAutor": "Soraya Santos",
+      "siglaPartidoAutor": "PL",
+      "uriPartidoAutor": "https://dadosabertos.camara.leg.br/api/v2/partidos/37906",
+      "siglaUFAutor": "RJ",
+      "ordemAssinatura": "1",
+      "proponente": "1"
+    },
+    {
+      "idProposicao": 2647361,
+      "uriProposicao": "https://dadosabertos.camara.leg.br/api/v2/proposicoes/2647361",
+      "idDeputadoAutor": 66828,
+      "uriAutor": "https://dadosabertos.camara.leg.br/api/v2/deputados/66828",
+      "codTipoAutor": 10000,
+      "tipoAutor": "Deputado(a)",
+      "nomeAutor": "Fausto Pinato",
+      "siglaPartidoAutor": "UNIÃO",
+      "uriPartidoAutor": "https://dadosabertos.camara.leg.br/api/v2/partidos/38009",
+      "siglaUFAutor": "SP",
+      "ordemAssinatura": "1",
+      "proponente": "1"
+    },
+    {
+      "idProposicao": 2647360,
+      "uriProposicao": "https://dadosabertos.camara.leg.br/api/v2/proposicoes/2647360",
+      "idDeputadoAutor": 178937,
+      "uriAutor": "https://dadosabertos.camara.leg.br/api/v2/deputados/178937",
+      "codTipoAutor": 10000,
+      "tipoAutor": "Deputado(a)",
+      "nomeAutor": "Altineu Côrtes",
+      "siglaPartidoAutor": "PL",
+      "uriPartidoAutor": "https://dadosabertos.camara.leg.br/api/v2/partidos/37906",
+      "siglaUFAutor": "RJ",
+      "ordemAssinatura": "1",
+      "proponente": "1"
+    },
+    {
+      "idProposicao": 2647359,
+      "uriProposicao": "https://dadosabertos.camara.leg.br/api/v2/proposicoes/2647359",
+      "idDeputadoAutor": 178937,
+      "uriAutor": "https://dadosabertos.camara.leg.br/api/v2/deputados/178937",
+      "codTipoAutor": 10000,
+      "tipoAutor": "Deputado(a)",
+      "nomeAutor": "Altineu Côrtes",
+      "siglaPartidoAutor": "PL",
+      "uriPartidoAutor": "https://dadosabertos.camara.leg.br/api/v2/partidos/37906",
+      "siglaUFAutor": "RJ",
+      "ordemAssinatura": "1",
+      "proponente": "1"
+    },
+    {
+      "idProposicao": 2647358,
+      "uriProposicao": "https://dadosabertos.camara.leg.br/api/v2/proposicoes/2647358",
+      "idDeputadoAutor": 178937,
+      "uriAutor": "https://dadosabertos.camara.leg.br/api/v2/deputados/178937",
+      "codTipoAutor": 10000,
+      "tipoAutor": "Deputado(a)",
+      "nomeAutor": "Altineu Côrtes",
+      "siglaPartidoAutor": "PL",
+      "uriPartidoAutor": "https://dadosabertos.camara.leg.br/api/v2/partidos/37906",
+      "siglaUFAutor": "RJ",
+      "ordemAssinatura": "1",
+      "proponente": "1"
+    },
+    {
+      "idProposicao": 2647357,
+      "uriProposicao": "https://dadosabertos.camara.leg.br/api/v2/proposicoes/2647357",
+      "idDeputadoAutor": 178937,
+      "uriAutor": "https://dadosabertos.camara.leg.br/api/v2/deputados/178937",
+      "codTipoAutor
