@@ -35,10 +35,14 @@ export const REGRAS = [
     id: 'aborto', sinal: -1, rotulo: 'Restringe o aborto legal', contestada: true,
     descricao: 'Dificulta ou proíbe o aborto nos casos já permitidos em lei (estupro, risco de vida e anencefalia), ou cria proteção jurídica ao feto desde a concepção.',
     re: [
-      /(proib|veda)\w*\b.{0,60}\baborto/,
+      /(proib|veda)\w*\b.{0,60}\b(aborto|interrupcao (voluntaria )?da gravidez|assistolia)/,
+      /vedar?\b.{0,140}\btema do aborto/,
       /direito\b.{0,30}\bobjecao de consciencia\b.{0,40}\baborto/,
       /proibicao legal de aborto|valorizar a vida do feto|vida desde a concepcao/,
-      /estatuto do nascituro|protecao ao nascituro/,
+      /estatuto do nascituro|protecao (ao|dos?) nascituros?|protecao dos direitos\b.{0,40}\bnascituro|direito a vida\b.{0,40}\bnascituro|direitos do nascituro/,
+      /justificacao e autorizacao\b.{0,40}\b(aborto|interrupcao)/,
+      // PL 1904/2024: a ementa só cita artigos do Código Penal; o art. 128 é o dos casos de aborto legal
+      /acresce\w*\b.{0,160}\bparagrafo unico ao art(igo|\.)? ?128\b.{0,60}\bcodigo penal/,
     ],
   },
   {
@@ -57,6 +61,8 @@ export const REGRAS = [
   {
     id: 'retrocesso', sinal: -1, rotulo: 'Retira direitos ou benefícios',
     descricao: 'Revoga, extingue ou reduz gratuidades, meia-entrada, passe livre, cotas e direitos trabalhistas ou sociais já garantidos.',
+    // "suspende a contagem da licença" durante internação do bebê estende o direito, não retira
+    exceto: [/suspend\w* (a )?contagem/],
     re: [
       /(revoga|extingue|suprime|suspende)\w*\b.{0,80}\b(gratuidade|meia-entrada|meia entrada|passe livre|isencao tarifaria|cotas|reserva de vagas|acao afirmativa|licenca-maternidade|licenca maternidade|piso salarial|adicional de insalubridade)/,
       /(flexibiliz|precariz)\w*\b.{0,40}\b(direitos trabalhistas|jornada de trabalho|clt\b)/,
@@ -94,7 +100,7 @@ export const REGRAS = [
   {
     id: 'aborto_legal', sinal: 1, rotulo: 'Garante o acesso ao aborto legal', contestada: true, par: 'aborto',
     descricao: 'Garante atendimento e informação sobre o aborto nos casos já permitidos em lei.',
-    re: [/aborto legal|atencao humanizada ao aborto|possibilidade de realizacao de aborto/],
+    re: [/aborto legal|atencao humanizada ao aborto|possibilidade de realizacao de aborto|susta\w*\b.{0,80}\bresolucao cfm\b.{0,120}\bassistolia/],
   },
   {
     id: 'qualidade', sinal: 1, rotulo: 'Cria política pública de qualidade de vida',

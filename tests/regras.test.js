@@ -131,6 +131,20 @@ test('impacto: direção das propostas', async () => {
   assert.equal(i('Revoga a Lei nº 16.784, que proíbe a caça no Estado de São Paulo'), 'ambiente');
   assert.equal(i('Proíbe o emprego da telemedicina em procedimentos de aborto.'), 'aborto');
   assert.equal(i('Institui o Programa de Atenção Humanizada ao Aborto Legal.'), 'aborto_legal');
+  // ementas reais da 57ª legislatura
+  assert.equal(i('Acresce dois parágrafos ao art. 124, um parágrafo único ao artigo 125, um segundo parágrafo ao artigo 126 e um parágrafo único ao artigo 128, todos do Código Penal Brasileiro, e dá outras providências.'), 'aborto');
+  assert.equal(i('Dispõe sobre a proibição do procedimento de assistolia fetal em casos específicos de interrupção da gravidez previstos em lei.'), 'aborto');
+  assert.equal(i('Acrescenta o artigo 128-A ao Decreto Lei nº 2.848, de 07 de dezembro de 1940 - Código Penal Brasileiro, para dispor sobre a proibição do uso do procedimento de assistolia fetal.'), 'aborto');
+  assert.equal(i('Dispõe sobre a proibição da interrupção voluntária da gravidez e dá outras providências.'), 'aborto');
+  assert.equal(i('Altera o caput do art. 5º da Constituição Federal para ampliar o alcance do direito à vida ao nascituro.'), 'aborto');
+  assert.equal(i('Altera a Lei nº 8.242, de 12 de outubro de 1991, para vedar ao Conselho Nacional dos Direitos da Criança e do Adolescente (Conanda) a discussão e o tratamento do tema do aborto em crianças e adolescentes.'), 'aborto');
+  assert.equal(i('Altera a Lei nº 8.080, de 19 de setembro de 1990, para dispor sobre o procedimento de justificação e autorização do aborto provocado no caso de gravidez resultante de estupro.'), 'aborto');
+  assert.equal(i('Susta a Resolução CFM N° 2.378, de 21 de março de 2024, que regulamenta o ato médico de assistolia fetal, para interrupção da gravidez, nos casos de aborto previsto em lei.'), 'aborto_legal');
+  // licença: suspender a contagem durante internação estende o direito
+  assert.equal(i('Altera dispositivos da CLT no que se refere à licença maternidade, suspendendo a contagem do prazo da licença-maternidade quando a criança necessitar de internação hospitalar.'), null);
+  assert.equal(i('Revoga o dispositivo que garante a licença-maternidade de 180 dias às servidoras.'), 'retrocesso');
+  // atenção à gestante e ao nascituro não é restrição
+  assert.notEqual(i('Dispõe sobre a prevenção da violência obstétrica no âmbito da atenção à saúde da gestante, parturiente, puérpera, do nascituro e do recém-nascido'), 'aborto');
   assert.equal(i('Determina a reserva de 3% das vagas em concursos públicos para pessoas transgênero'), 'desigualdade');
   assert.equal(i('Institui a Política Estadual de Combate à Fome', 'social'), 'desigualdade');
   assert.equal(i('Institui o Programa Estadual de Saúde Bucal', 'saude'), 'qualidade');
