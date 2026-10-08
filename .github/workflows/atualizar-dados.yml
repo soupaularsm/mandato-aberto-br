@@ -1,0 +1,81 @@
+name: Atualizar dados (semanal)
+
+on:
+  schedule:
+    # Segunda-feira, 06:17 em São Paulo (09:17 UTC)
+    - cron: '17 9 * * 1'
+  # Também recalcula quando coletores, regras ou pesos mudam
+  push:
+    branches: [main]
+    paths: [scripts/**, config/**, package.json, .github/workflows/atualizar-dados.yml]
+  workflow_dispatch:
+    inputs:
+      casas:
+        description: 'Casas a coletar (camara,senado)'
+        default: 'camara,senado'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: atualizar-dados
+  cancel-in-progress: true
+
+jobs:
+  atualizar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 150
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      - run: npm test
+
+      # Guarda respostas que não mudam (votações antigas, processos encerrados)
+      # para as próximas execuções serem rápidas.
+      - uses: actions/cache@v4
+        with:
+          path: .cache
+          key: coleta-${{ github.run_id }}
+          restore-keys: coleta-
+
+      - name: Coletar e calcular score
+        run: |
+          set -o pipefail
+          node --max-old-space-size=6144 scripts/build-data.js --casas=${{ github.event.inputs.casas || 'camara,senado' }} 2>&1 | tee /tmp/coleta.log
+          node scripts/fotos.js 2>&1 | tee -a /tmp/coleta.log
+
+      - name: Publicar dados no repositório
+        run: |
+          git config user.name "placar-bot"
+          git config user.email "placar-bot@users.noreply.github.com"
+          git add public/data
+          if git diff --cached --quiet; then
+            echo "Sem mudanças nos dados."
+          else
+            git commit -m "dados: atualização de $(date -u +%Y-%m-%d)"
+            git pull --rebase origin main
+            git push
+          fi
+
+      # Guarda o log da coleta no branch "logs" (útil para auditoria e depuração)
+      - name: Publicar log
+        if: always()
+        run: |
+          mkdir -p /tmp/logs && cd /tmp/logs
+          cp /tmp/coleta.log "coleta-$(date -u +%Y-%m-%dT%H%M).log" 2>/dev/null || echo "sem log" > "coleta-$(date -u +%Y-%m-%dT%H%M).log"
+          cp "$(ls coleta-*.log | tail -1)" ultima.log
+          git init -q -b logs
+          git config user.name "placar-bot"
+          git config user.email "placar-bot@users.noreply.github.com"
+          git remote add origin "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git"
+          git fetch -q --depth 1 origin logs && git reset -q --soft origin/logs || true
+          git add -A
+          git commit -qm "log ${{ github.run_id }} (${{ job.status }})"
+          git push -q origin logs

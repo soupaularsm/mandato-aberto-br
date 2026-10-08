@@ -1,0 +1,136 @@
+{
+  "_comentario": "Pesos e parâmetros do score. Os pesos não precisam somar 100: o score normaliza pelos componentes disponíveis. Para criar um critério novo, adicione-o aqui e implemente o cálculo em scripts/lib/score.js (função extratores).",
+  "versao_metodologia": "0.3",
+  "componentes": {
+    "assiduidade": {
+      "peso": 20,
+      "rotulo": "Assiduidade",
+      "descricao": "Presença em sessões deliberativas do plenário (Câmara) ou participação em votações nominais (Senado), contando só o período em que a pessoa estava em exercício.",
+      "direcao": "maior_melhor"
+    },
+    "agenda": {
+      "peso": 20,
+      "rotulo": "Relevância da agenda",
+      "descricao": "Soma dos temas das proposições normativas, cada uma com o peso do seu tema. Temas prioritários somam mais; simbólicas e homenagens (nome de via, data comemorativa, feriado, título, utilidade pública) tiram pontos. Escala logarítmica.",
+      "direcao": "maior_melhor"
+    },
+    "direitos": {
+      "peso": 15,
+      "rotulo": "Direitos e qualidade de vida",
+      "descricao": "Direção das proposições normativas. Propostas que reduzem desigualdade, ampliam direitos ou criam política pública de qualidade de vida somam 1; as que restringem direitos de minorias, retiram direitos conquistados ou enfraquecem a proteção ambiental tiram 2. O saldo é dividido pelo número de projetos substantivos (com 5 projetos neutros de suavização), então conta a qualidade, não o volume. Regras publicadas na metodologia; cada proposta marcada aparece no perfil.",
+      "direcao": "maior_melhor"
+    },
+    "producao": {
+      "peso": 10,
+      "rotulo": "Produção legislativa",
+      "descricao": "Proposições normativas de autoria (PL, PLP, PEC, PDL etc.), excluindo as simbólicas. Escala logarítmica: a 50ª proposta vale menos que a 5ª.",
+      "direcao": "maior_melhor"
+    },
+    "efetividade": {
+      "peso": 15,
+      "rotulo": "Efetividade",
+      "descricao": "Taxa de proposições não simbólicas aprovadas pela casa ou transformadas em norma, suavizada para quem tem poucas propostas (5 propostas “fantasma” na média da casa).",
+      "direcao": "maior_melhor"
+    },
+    "fiscalizacao": {
+      "peso": 15,
+      "rotulo": "Fiscalização",
+      "descricao": "Requerimentos de informação e propostas de fiscalização e controle, a ferramenta do parlamentar para cobrar o Executivo.",
+      "direcao": "maior_melhor"
+    },
+    "custo_cota": {
+      "peso": 12,
+      "rotulo": "Economia na cota",
+      "descricao": "Gasto médio mensal com a cota parlamentar (CEAP na Câmara, CEAPS no Senado). Quem gasta menos que os pares pontua mais.",
+      "direcao": "menor_melhor"
+    },
+    "custo_pessoal": {
+      "peso": 8,
+      "rotulo": "Enxugamento do gabinete",
+      "descricao": "Número de assessores lotados no gabinete. Quem mantém gabinete menor pontua mais. Comparado com todos os parlamentares da mesma casa.",
+      "direcao": "menor_melhor"
+    }
+  },
+  "parametros": {
+    "suavizacao_efetividade_k": 5,
+    "dias_minimos_em_exercicio": 120,
+    "cobertura_minima_para_ranking": 0.6
+  },
+  "casas": {
+    "camara": {
+      "nome": "Câmara dos Deputados",
+      "inicio_legislatura": "2023-02-01",
+      "id_legislatura": 57,
+      "benchmark": "nacional",
+      "salario_mensal": 46366.19,
+      "verba_gabinete_mensal": 165806.07,
+      "max_assessores": 25
+    },
+    "senado": {
+      "nome": "Senado Federal",
+      "inicio_legislatura": "2023-02-01",
+      "benchmark": "nacional",
+      "salario_mensal": 46366.19
+    }
+  },
+  "_fontes_valores": {
+    "verba_gabinete_mensal": "camara.leg.br/deputados/{id}/verba-gabinete (2026)",
+    "salario_mensal": "Conferir a cada reajuste."
+  },
+  "temas": {
+    "_comentario": "Peso de cada tema no critério Relevância da agenda. Positivo soma, negativo subtrai. Prioridades editoriais do projeto: ajuste aqui e o site reflete na próxima atualização.",
+    "prioritarios": {
+      "peso": 1.0,
+      "temas": [
+        "seguranca",
+        "criancas",
+        "saude",
+        "educacao",
+        "contas",
+        "cidades"
+      ]
+    },
+    "relevantes": {
+      "peso": 0.6,
+      "temas": [
+        "ambiente",
+        "social",
+        "trabalho",
+        "transparencia",
+        "tecnologia",
+        "justica",
+        "consumidor",
+        "agro"
+      ]
+    },
+    "complementares": {
+      "peso": 0.3,
+      "temas": [
+        "cultura",
+        "institucional",
+        "outros"
+      ]
+    },
+    "simbolicas": {
+      "peso": -1.0,
+      "temas": [
+        "simbolica"
+      ]
+    }
+  },
+  "impacto": {
+    "_comentario": "Direção das propostas (scripts/lib/impacto.js). Regras contestadas só valem se ligadas aqui; desligadas, a proposta fica neutra.",
+    "peso_amplia": 1,
+    "peso_restringe": -2,
+    "regras": {
+      "aborto": true,
+      "escola": false,
+      "armas": false
+    },
+    "suavizacao_k": 5
+  },
+  "escopo": {
+    "nome": "Brasil",
+    "sigla": "BR"
+  }
+}

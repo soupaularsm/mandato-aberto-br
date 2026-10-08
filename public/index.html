@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Mandato Aberto BR · Placar do Congresso Nacional</title>
+<meta name="description" content="Presença, propostas, gastos e um score de valor ao cidadão dos 513 deputados federais e 81 senadores do Brasil, atualizados toda semana com dados oficiais.">
+<meta name="theme-color" content="#1c3f94">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Mandato Aberto BR">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:title" content="Mandato Aberto BR · Quem representa o Brasil, medido toda semana">
+<meta property="og:description" content="Presença, propostas e gastos dos 594 deputados federais e senadores, com nota de 0 a 100 e dados oficiais.">
+<meta property="og:image" content="og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="og.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="styles.css">
+<!-- Vercel Web Analytics (sem cookies) -->
+<script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
+<script defer src="/_vercel/insights/script.js"></script>
+</head>
+<body>
+<div id="aviso-amostra" class="aviso" hidden><div class="wrap">Dados fictícios de demonstração. Nomes, partidos e números foram gerados para testar o site.</div></div>
+
+<header class="topo">
+  <div class="wrap">
+    <a class="logo" href="#inicio" aria-label="Mandato Aberto BR, página inicial">
+      <span class="logo-marca" aria-hidden="true"><svg viewBox="0 0 18 18" fill="none"><rect x="2" y="9" width="3.5" height="7" rx="1" fill="#fff"/><rect x="7.25" y="3" width="3.5" height="13" rx="1" fill="#fff"/><rect x="12.5" y="6" width="3.5" height="10" rx="1" fill="#fff" opacity=".6"/></svg></span>
+      Mandato Aberto <span class="logo-tag">BR</span>
+    </a>
+    <nav class="nav" aria-label="Principal">
+      <a href="#inicio" data-nav="inicio">Início</a>
+      <a href="#partidos" data-nav="partidos">Partidos</a>
+      <a href="#tipo-camara-lei" data-nav="tipo" class="opcional">Proposições</a>
+      <a href="#metodologia" data-nav="metodologia">Metodologia</a>
+    </nav>
+  </div>
+</header>
+
+<main id="app" tabindex="-1"><p class="vazio">Carregando dados…</p></main>
+
+<footer class="rodape">
+  <div class="wrap">
+    <span>Fontes: Dados Abertos da Câmara dos Deputados e do Senado Federal.</span>
+    <span>Dados de <span id="data-ref">–</span>. Metodologia <span id="versao"></span>, aberta para auditoria.</span>
+  </div>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>
