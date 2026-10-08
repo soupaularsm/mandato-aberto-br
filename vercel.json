@@ -12,5 +12,18 @@
         }
       ]
     }
+  ],
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "mandato-aberto-br.vercel.app"
+        }
+      ],
+      "destination": "https://www.mandatoaberto.online/:path*",
+      "permanent": false
+    }
   ]
 }
