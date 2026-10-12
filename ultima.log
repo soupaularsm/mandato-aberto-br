@@ -6,10 +6,15 @@ Câmara: histórico de exercício
 Câmara: sessões e presenças
   409 sessões deliberativas
 Câmara: proposições
-  224501 proposições de primeira autoria
+  224842 proposições de primeira autoria
 Câmara: cota parlamentar (CEAP)
 Câmara: pessoal e verba de gabinete
-  ! falhou (opcional): https://www.camara.leg.br/deputados/220706/pessoal-gabinete?ano=2026 — HTTP 500
+  ! falhou (opcional): https://www.camara.leg.br/deputados/204482/pessoal-gabinete?ano=2026 — HTTP 500
+  ! falhou (opcional): https://www.camara.leg.br/deputados/178871/pessoal-gabinete?ano=2026 — HTTP 500
+  ! falhou (opcional): https://www.camara.leg.br/deputados/74454/pessoal-gabinete?ano=2026 — HTTP 500
+  ! falhou (opcional): https://www.camara.leg.br/deputados/178946/pessoal-gabinete?ano=2026 — HTTP 500
+  ! falhou (opcional): https://www.camara.leg.br/deputados/178947/pessoal-gabinete?ano=2026 — HTTP 500
+  ! falhou (opcional): https://www.camara.leg.br/deputados/92776/pessoal-gabinete?ano=2026 — HTTP 500
   ok: 513 parlamentares
 
 === Senado Federal ===
@@ -23,5 +28,5 @@ Senado: pessoal de gabinete
   ok: 81 parlamentares
 Tipos não mapeados (top 25): [["DOC (Ofício da Primeira-Secretaria)",2721],["DOC (Alteração em Frente Parlamentar Registrada na Câmara dos Deputados)",336],["PROC (Processo Interno)",150],["DOC (Alteração em Grupo Parlamentar Instalado na Câmara dos Deputados)",87],["DOC (Instalação de Grupo Parlamentar na Câmara dos Deputados)",83],["OF (Ofício)",40],["DOC (Adesão a Bloco Parlamentar)",13],["DOC (Desligamento de Bloco Parlamentar)",12],["DOC (Desligamento de Frente Parlamentar Registrada)",9],["PFS (Proposta de Fiscalização e Controle)",9],["DOC (Constituição de Bloco Parlamentar)",8],["DOC (Documento)",8],["PET (Petição)",7],["ATA (Ata)",6],["ERR (Errata)",4],["PIN (Proposta de Instrução Normativa)",3],["PCE (Petição)",3],["OFS (Ofício)",2],["MAN (Manifestação do Relator)",1],["DOC (Desligamento de Grupo Parlamentar Registrado)",1],["APJ (Anteprojeto)",1],["DOC (Ofício de Órgão da Câmara dos Deputados)",1],["CON (Consulta)",1],["ADD (Adendo)",1],["CON (CONSULTA (SF))",1]]
 
-Pronto: 594 parlamentares (5 sem score). Saída em public/data/
+Pronto: 594 parlamentares (4 sem score). Saída em public/data/
 Fotos: 594 ok, 0 sem foto
